@@ -1,0 +1,76 @@
+<html>
+<head><title>
+STOKE
+</title>
+</head>
+
+
+<body> 
+    <button id="connectButton">Connect</button>
+    <br>
+    <label>Zgjidh numrin e kundershtareve</label>
+    <input >>
+    <br>
+    <button id="getNearbyUsers">Get Nearby Users</button>
+    <br>
+    <button id="toke">TOKE!</button>
+    <br>
+   
+
+    
+</body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js">
+</script>
+
+<script>
+const socket= io('http://localhost:34260',{
+transports: ['websocket']
+}); 
+socket.on("connected",()=>{
+    console.log("connected")
+
+  
+});
+socket.on('LOBBY/READY_FOR_TOKE_GUEST',cb)
+function cb(usr){
+    console.log('received event');
+    console.log(usr);
+    otherUser= usr
+}
+
+let otherUser = null;
+window.onload=function(){
+document.getElementById('getNearbyUsers').onclick=getPos;
+
+
+
+}
+
+document.getElementById('toke').onclick = function(){
+    socket.emit("TOKE/ACK",otherUser);
+
+}
+
+function getPos()  {
+  if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position){
+    var pos = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      };
+      console.log(pos);
+      var a =  {'position': pos,'username':'kot'};
+
+socket.emit("LOBBY/GET_NEARBY_USERS",JSON.stringify(a));
+  });
+} else {
+    alert("Geolocation is not supported by this browser.");
+  }
+}
+
+
+
+</script>
+
+</html>
