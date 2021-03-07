@@ -10,3 +10,5 @@ was to strengthen the sense of the commu-
 nity between young customers. I used Flutter,
 NodeJs and geolocation api to implement the
 prototype.
+
+Demo of the app/feature : https://drive.google.com/file/d/1iiefQBd1kI-8WEU6rR62ScDL8njCXDS8/view?usp=sharing (Minute 1:50).
